@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const CONTACT_EMAIL = "hello@example.com";
+const CONTACT_EMAIL = "hello@anthonydunnatelier.com";
 
 const galleryItems = [
   "/gallery/1.jpg",
@@ -214,10 +214,14 @@ export default function Home() {
       {/* Gallery Section */}
       <section className="container mx-auto px-4 py-16">
         <Carousel className="w-full">
+          <div className="flex justify-between mb-4 md:hidden">
+            <CarouselPrevious className="static translate-y-0" />
+            <CarouselNext className="static translate-y-0" />
+          </div>
           <CarouselContent>
             {gallerySlides.map((slide, slideIndex) => (
               <CarouselItem key={slideIndex}>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {slide.map((src, index) => (
                     <div key={index} className="overflow-hidden">
                       <Image
@@ -234,8 +238,8 @@ export default function Home() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
         </Carousel>
       </section>
 
@@ -270,7 +274,13 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t py-8">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-sm text-muted-foreground">
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {CONTACT_EMAIL}
+          </a>
+          <p className="text-sm text-muted-foreground mt-2">
             &copy; {new Date().getFullYear()} Anthony Dunn Atelier. All rights
             reserved.
           </p>
