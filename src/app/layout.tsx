@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Spectral } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
+import { MetaPixel } from "@/components/analytics/MetaPixel";
 
 const spectral = Spectral({
   weight: ["400", "500", "600", "700"],
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${spectral.variable} font-sans antialiased`}>
+        <MetaPixel />
         <div className="flex min-h-screen flex-col">
           <Navbar />
           <main className="flex-1">{children}</main>

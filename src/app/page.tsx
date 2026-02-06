@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +15,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+
+function trackLead() {
+  if (typeof window !== "undefined" && window.fbq) {
+    window.fbq("track", "Lead");
+  }
+}
 
 const CONTACT_EMAIL = "hello@anthonydunnatelier.com";
 
@@ -246,7 +254,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-16 text-center">
         <Button size="lg" className="rounded-none bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]" asChild>
-          <a href={`mailto:${CONTACT_EMAIL}`}>Commission Inquiry</a>
+          <a href={`mailto:${CONTACT_EMAIL}`} onClick={trackLead}>Commission Inquiry</a>
         </Button>
       </section>
 
@@ -276,6 +284,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <a
             href={`mailto:${CONTACT_EMAIL}`}
+            onClick={trackLead}
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             {CONTACT_EMAIL}
