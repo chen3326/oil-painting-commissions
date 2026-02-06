@@ -95,27 +95,27 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
           <tbody>
             <tr className="border-b">
               <td className="py-2 pr-4">Intimate</td>
-              <td className="py-2 pr-4">Up to 12&quot; x 16&quot;</td>
+              <td className="py-2 pr-4">12&quot; x 16&quot;</td>
               <td className="py-2 pr-4">2–4 weeks</td>
-              <td className="py-2">$1,000</td>
+              <td className="py-2">$1,200</td>
             </tr>
             <tr className="border-b">
               <td className="py-2 pr-4">Classic</td>
-              <td className="py-2 pr-4">Up to 24&quot; x 36&quot;</td>
+              <td className="py-2 pr-4">18&quot; x 24&quot;</td>
               <td className="py-2 pr-4">2–4 weeks</td>
               <td className="py-2">$3,000</td>
             </tr>
             <tr className="border-b">
               <td className="py-2 pr-4">Statement</td>
-              <td className="py-2 pr-4">Up to 36&quot; x 48&quot;</td>
+              <td className="py-2 pr-4">30&quot; x 40&quot;</td>
               <td className="py-2 pr-4">4–6 weeks</td>
-              <td className="py-2">$10,000</td>
+              <td className="py-2">$12,000</td>
             </tr>
             <tr>
               <td className="py-2 pr-4">Grand</td>
-              <td className="py-2 pr-4">48&quot; and above</td>
+              <td className="py-2 pr-4">48&quot; x 60&quot;+</td>
               <td className="py-2 pr-4">6+ weeks</td>
-              <td className="py-2">$18,000</td>
+              <td className="py-2">$30,000+</td>
             </tr>
           </tbody>
         </table>
@@ -153,8 +153,28 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
   },
   {
     question: "What do you need from me to get started?",
-    answer:
-      "To begin, please share the purpose of your painting and the story behind your subject—this helps me understand what the piece should convey. Reference photos are helpful (multiple angles are ideal), along with any examples of styles you admire. Let me know your preferred size and any additional requests. If you are unsure about any of the above, I am happy to advise based on my experience.",
+    answer: (
+      <>
+        <p className="mb-4">
+          To begin, please share a reference photo—this is what the painting
+          will be based on. Multiple angles are helpful if available.
+        </p>
+        <p className="mb-4">
+          Let me know the style you have in mind. If you admire a particular
+          painting or artist, include it as a reference.
+        </p>
+        <p className="mb-4">
+          Tell me the size you are considering and where the painting will be
+          displayed.
+        </p>
+        <p className="mb-4">
+          Finally, share the background and purpose of the piece—who is the
+          subject, what the occasion is, and what you want the painting to
+          convey.
+        </p>
+        <p>If you are unsure about any of the above, I am happy to advise.</p>
+      </>
+    ),
   },
   {
     question: "What subjects are accepted, and what subjects are not?",
@@ -164,7 +184,7 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
   {
     question: "Can you work from old or low-quality photos?",
     answer:
-      "Yes. I have created pieces from old black-and-white family photos, and it is not an issue. I would even say a photo is not strictly required—if you can describe what you have in mind, we can work together to bring it to life on canvas.",
+      "Yes. I have created pieces from old black-and-white family photos, and it is not an issue.",
   },
   {
     question: "Can the painting differ from my photo?",
