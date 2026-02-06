@@ -268,6 +268,9 @@ export default function Home() {
       {/* CTA Section */}
       <section className="container mx-auto px-4 py-16 text-center">
         <InquiryDialog />
+        <p className="text-sm text-muted-foreground mt-4">
+          *Currently accepting commissions for February and March 2026.
+        </p>
       </section>
 
       {/* FAQ Section */}
