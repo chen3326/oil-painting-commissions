@@ -15,6 +15,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { InquiryDialog } from "@/components/InquiryDialog";
+import ImageViewer_Basic from "@/components/commerce-ui/image-viewer-basic";
 
 const CONTACT_EMAIL = "hello@anthonydunnatelier.com";
 
@@ -246,14 +247,19 @@ export default function Home() {
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {slide.map((src, index) => (
                     <div key={index} className="overflow-hidden">
-                      <Image
-                        src={src}
-                        alt={`Gallery painting ${slideIndex * 6 + index + 1}`}
-                        width={800}
-                        height={600}
-                        className="w-full h-auto"
-                        sizes="(max-width: 640px) 100vw, 33vw"
-                      />
+                      <ImageViewer_Basic
+                        imageUrl={src}
+                        imageTitle={`Gallery painting ${slideIndex * 6 + index + 1}`}
+                      >
+                        <Image
+                          src={src}
+                          alt={`Gallery painting ${slideIndex * 6 + index + 1}`}
+                          width={800}
+                          height={600}
+                          className="w-full h-auto transition-opacity hover:opacity-90"
+                          sizes="(max-width: 640px) 50vw, 33vw"
+                        />
+                      </ImageViewer_Basic>
                     </div>
                   ))}
                 </div>
