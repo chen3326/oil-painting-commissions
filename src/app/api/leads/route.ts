@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { put, list } from "@vercel/blob";
+import { put, list, del } from "@vercel/blob";
 
 interface LeadData {
   name: string;
@@ -66,10 +66,11 @@ export async function GET(request: NextRequest) {
   try {
     const { blobs } = await list({ prefix: "leads/" });
 
-    const leads: LeadData[] = await Promise.all(
+    const leads = await Promise.all(
       blobs.map(async (blob) => {
         const response = await fetch(blob.url);
-        return response.json() as Promise<LeadData>;
+        const data = (await response.json()) as LeadData;
+        return { url: blob.url, ...data };
       })
     );
 
@@ -83,6 +84,36 @@ export async function GET(request: NextRequest) {
   } catch {
     return NextResponse.json(
       { error: "Failed to fetch leads." },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { url, password } = body;
+
+    if (
+      !process.env.ADMIN_PASSWORD ||
+      password !== process.env.ADMIN_PASSWORD
+    ) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    if (!url) {
+      return NextResponse.json(
+        { error: "Blob URL is required." },
+        { status: 400 }
+      );
+    }
+
+    await del(url);
+
+    return NextResponse.json({ success: true });
+  } catch {
+    return NextResponse.json(
+      { error: "Failed to delete lead." },
       { status: 500 }
     );
   }

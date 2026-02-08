@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 interface Lead {
+  url: string;
   name: string;
   email: string;
   phone: string;
@@ -55,6 +56,21 @@ export default function AdminPage() {
 
   const handleRefresh = () => {
     fetchLeads(password);
+  };
+
+  const handleDelete = async (url: string) => {
+    if (!window.confirm("Are you sure you want to delete this lead?")) return;
+    try {
+      const res = await fetch("/api/leads", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url, password }),
+      });
+      if (!res.ok) throw new Error("Failed to delete lead.");
+      setLeads((prev) => prev.filter((lead) => lead.url !== url));
+    } catch {
+      setError("Failed to delete lead. Please try again.");
+    }
   };
 
   const handleLogout = () => {
@@ -143,6 +159,7 @@ export default function AdminPage() {
                   <th className="px-4 py-3 font-medium">Subject</th>
                   <th className="px-4 py-3 font-medium">Size</th>
                   <th className="px-4 py-3 font-medium">Ready</th>
+                  <th className="px-4 py-3 font-medium">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -171,6 +188,16 @@ export default function AdminPage() {
                     <td className="px-4 py-3 whitespace-nowrap">{lead.subject}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{lead.size}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{lead.ready}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700"
+                        onClick={() => handleDelete(lead.url)}
+                      >
+                        Delete
+                      </Button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
