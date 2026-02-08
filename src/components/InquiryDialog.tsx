@@ -235,7 +235,7 @@ export function InquiryDialog() {
         {/* Step 4: Contact info */}
         {isContactStep && (
           <div className="py-4 space-y-4">
-            <p className="text-lg mb-6">How can we reach you?</p>
+            <p className="text-lg mb-6">How can I reach you?</p>
             <div className="space-y-3">
               <div>
                 <Label htmlFor="lead-name" className="mb-1.5">
@@ -283,10 +283,10 @@ export function InquiryDialog() {
         {isSuccessScreen && (
           <div className="py-4 space-y-4">
             <p className="text-lg">
-              We&apos;ll reach out to you shortly via email.
+              I&apos;ll reach out to you shortly via email.
             </p>
             <p className="text-sm text-muted-foreground">
-              You&apos;re also welcome to reach us first directly at{" "}
+              You&apos;re also welcome to reach me first directly at{" "}
               <a href="mailto:hello@anthonydunnatelier.com" className="underline hover:text-foreground transition-colors">
                 hello@anthonydunnatelier.com
               </a>
