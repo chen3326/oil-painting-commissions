@@ -203,11 +203,10 @@ export function InquiryDialog() {
               className="space-y-3"
             >
               {currentStep.options.map((option) => (
-                <div key={option.value} className="flex items-start gap-3">
+                <div key={option.value} className="flex items-center gap-3 min-h-[44px] py-1">
                   <RadioGroupItem
                     value={option.value}
                     id={option.value}
-                    className="mt-1"
                   />
                   <div>
                     <Label
@@ -236,7 +235,7 @@ export function InquiryDialog() {
         {/* Step 4: Contact info */}
         {isContactStep && (
           <div className="py-4 space-y-4">
-            <p className="text-lg mb-2">How can we reach you?</p>
+            <p className="text-lg mb-6">How can we reach you?</p>
             <div className="space-y-3">
               <div>
                 <Label htmlFor="lead-name" className="mb-1.5">
@@ -294,7 +293,7 @@ export function InquiryDialog() {
 
         <div className="flex justify-between pt-4">
           {step > 1 && !isSuccessScreen ? (
-            <Button variant="outline" onClick={handleBack} disabled={submitting}>
+            <Button variant="outline" className="rounded-none min-w-[120px]" onClick={handleBack} disabled={submitting}>
               Back
             </Button>
           ) : (
@@ -305,7 +304,7 @@ export function InquiryDialog() {
             <Button
               onClick={handleNext}
               disabled={!canProceedQualification}
-              className="bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]"
+              className="rounded-none min-w-[120px] bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]"
             >
               Next
             </Button>
@@ -315,7 +314,7 @@ export function InquiryDialog() {
             <Button
               onClick={handleSubmit}
               disabled={!canSubmitContact}
-              className="bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]"
+              className="rounded-none min-w-[120px] bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]"
             >
               {submitting ? "Submitting\u2026" : "Submit"}
             </Button>
@@ -324,7 +323,7 @@ export function InquiryDialog() {
           {isSuccessScreen && (
             <Button
               onClick={() => handleOpenChange(false)}
-              className="bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]"
+              className="rounded-none min-w-[120px] bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]"
             >
               Close
             </Button>

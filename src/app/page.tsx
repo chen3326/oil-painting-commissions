@@ -84,7 +84,7 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
           Timeline and pricing depend on size and complexity. Below is a general
           guide:
         </p>
-        <table className="w-full mb-4 text-sm border-collapse">
+        <table className="w-full mb-4 text-base md:text-sm border-collapse">
           <thead>
             <tr className="border-b">
               <th className="text-left py-2 pr-4">Size</th>
