@@ -11,8 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-
-const CONTACT_EMAIL = "hello@anthonydunnatelier.com";
+import { Input } from "@/components/ui/input";
 
 const STEPS = [
   {
@@ -27,24 +26,39 @@ const STEPS = [
     ],
   },
   {
-    question: "Budget range?",
-    key: "budget" as const,
+    question: "Which size are you considering?",
+    key: "size" as const,
     options: [
-      { value: "under-1000", label: "Under $1,000" },
-      { value: "1000-3000", label: "$1,000–$3,000" },
-      { value: "3000-10000", label: "$3,000–$10,000" },
-      { value: "10000+", label: "$10,000+" },
-      { value: "not-sure", label: "Not sure" },
-    ],
-  },
-  {
-    question: "Timeline?",
-    key: "timeline" as const,
-    options: [
-      { value: "no-rush", label: "No rush" },
-      { value: "6-weeks", label: "Within 6 weeks" },
-      { value: "specific-date", label: "For a specific date" },
-      { value: "not-sure", label: "Not sure" },
+      {
+        value: "intimate",
+        label: 'Intimate — Up to 12" × 16"',
+        description: "Perfect for tabletop display or smaller spaces",
+        detail: "From $1,200 · 2–4 weeks",
+      },
+      {
+        value: "classic",
+        label: 'Classic — Up to 18" × 24"',
+        description: "The standard size for wall-mounted portraits",
+        detail: "From $3,000 · 2–4 weeks",
+      },
+      {
+        value: "statement",
+        label: 'Statement — Up to 30" × 40"',
+        description: "A commanding presence for larger wall spaces",
+        detail: "From $12,000 · 4–6 weeks",
+      },
+      {
+        value: "grand",
+        label: 'Grand — 48" × 60" and above',
+        description: "Gallery-scale works for grand interiors",
+        detail: "From $30,000+ · 6+ weeks",
+      },
+      {
+        value: "not-sure",
+        label: "Not sure yet",
+        description: "I'd like guidance on the right size",
+        detail: "",
+      },
     ],
   },
   {
@@ -60,8 +74,7 @@ const STEPS = [
 
 type Answers = {
   subject: string;
-  budget: string;
-  timeline: string;
+  size: string;
   ready: string;
 };
 
@@ -76,47 +89,84 @@ export function InquiryDialog() {
   const [step, setStep] = useState(1);
   const [answers, setAnswers] = useState<Answers>({
     subject: "",
-    budget: "",
-    timeline: "",
+    size: "",
     ready: "",
   });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
-  const currentStep = STEPS[step - 1];
-  const isLastStep = step === STEPS.length;
-  const isFinalScreen = step === STEPS.length + 1;
+  const totalQualificationSteps = STEPS.length; // 3
+  const isQualificationStep = step <= totalQualificationSteps;
+  const isContactStep = step === totalQualificationSteps + 1; // step 4
+  const isSuccessScreen = step === totalQualificationSteps + 2; // step 5
 
-  const canProceed = !isFinalScreen && answers[currentStep?.key];
+  const currentStep = isQualificationStep ? STEPS[step - 1] : null;
+  const canProceedQualification = currentStep && answers[currentStep.key];
+  const canSubmitContact =
+    name.trim() && email.trim() && phone.trim() && !submitting;
 
   const handleNext = () => {
-    if (isLastStep) {
-      setStep(step + 1);
-    } else {
-      setStep(step + 1);
-    }
+    setStep(step + 1);
   };
 
   const handleBack = () => {
+    setError("");
     setStep(step - 1);
   };
 
-  const handleSendInquiry = () => {
-    // Fire Lead event only if qualified
-    const isQualified =
-      answers.budget !== "under-1000" && answers.ready !== "browsing";
+  const handleSubmit = async () => {
+    setError("");
+    setSubmitting(true);
+
+    // Fire Lead event for qualified leads before API call
+    const isQualified = answers.ready !== "browsing";
     if (isQualified) {
       trackLead();
     }
 
-    window.location.href = `mailto:${CONTACT_EMAIL}`;
-    setOpen(false);
+    try {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          ...answers,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        return;
+      }
+
+      setSubmitted(true);
+      setStep(totalQualificationSteps + 2); // success screen
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen);
     if (!newOpen) {
-      // Reset state when dialog closes
       setStep(1);
-      setAnswers({ subject: "", budget: "", timeline: "", ready: "" });
+      setAnswers({ subject: "", size: "", ready: "" });
+      setName("");
+      setEmail("");
+      setPhone("");
+      setSubmitting(false);
+      setSubmitted(false);
+      setError("");
     }
   };
 
@@ -133,11 +183,16 @@ export function InquiryDialog() {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>
-            {isFinalScreen ? "Almost there!" : `Step ${step} of 4`}
+            {isSuccessScreen
+              ? "Thank you!"
+              : isContactStep
+                ? "Step 4 of 4"
+                : `Step ${step} of 4`}
           </DialogTitle>
         </DialogHeader>
 
-        {!isFinalScreen && currentStep && (
+        {/* Steps 1-3: Qualification radio groups */}
+        {isQualificationStep && currentStep && (
           <div className="py-4">
             <p className="text-lg mb-6">{currentStep.question}</p>
             <RadioGroup
@@ -148,27 +203,89 @@ export function InquiryDialog() {
               className="space-y-3"
             >
               {currentStep.options.map((option) => (
-                <div key={option.value} className="flex items-center gap-3">
-                  <RadioGroupItem value={option.value} id={option.value} />
-                  <Label htmlFor={option.value} className="cursor-pointer text-base">
-                    {option.label}
-                  </Label>
+                <div key={option.value} className="flex items-start gap-3">
+                  <RadioGroupItem
+                    value={option.value}
+                    id={option.value}
+                    className="mt-1"
+                  />
+                  <div>
+                    <Label
+                      htmlFor={option.value}
+                      className="cursor-pointer text-base"
+                    >
+                      {option.label}
+                    </Label>
+                    {"description" in option && option.description && (
+                      <p className="text-sm text-muted-foreground mt-0.5">
+                        {option.description}
+                      </p>
+                    )}
+                    {"detail" in option && option.detail && (
+                      <p className="text-sm text-muted-foreground mt-0.5">
+                        {option.detail}
+                      </p>
+                    )}
+                  </div>
                 </div>
               ))}
             </RadioGroup>
           </div>
         )}
 
-        {isFinalScreen && (
+        {/* Step 4: Contact info */}
+        {isContactStep && (
           <div className="py-4 space-y-4">
-            <p>Please email me with the following:</p>
-            <ul className="space-y-1">
-              <li>• A brief description of who or what you'd like painted</li>
-              <li>• Reference photos (if available)</li>
-              <li>• Any details about the occasion or purpose</li>
-              <li>• Your preferred size, or let me know if you'd like guidance</li>
-            </ul>
-            <p>I'll reply with a quote and any questions I may have.</p>
+            <p className="text-lg mb-2">How can we reach you?</p>
+            <div className="space-y-3">
+              <div>
+                <Label htmlFor="lead-name" className="mb-1.5">
+                  Name
+                </Label>
+                <Input
+                  id="lead-name"
+                  placeholder="Your full name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div>
+                <Label htmlFor="lead-email" className="mb-1.5">
+                  Email
+                </Label>
+                <Input
+                  id="lead-email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <Label htmlFor="lead-phone" className="mb-1.5">
+                  Phone
+                </Label>
+                <Input
+                  id="lead-phone"
+                  type="tel"
+                  placeholder="(555) 123-4567"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
+            </div>
+            {error && (
+              <p className="text-sm text-red-600">{error}</p>
+            )}
+          </div>
+        )}
+
+        {/* Success screen */}
+        {isSuccessScreen && (
+          <div className="py-4 space-y-4">
+            <p className="text-lg">
+              We&apos;ll reach out to you shortly via email.
+            </p>
             <p className="text-sm text-muted-foreground">
               Most inquiries are answered within 12 hours.
             </p>
@@ -176,28 +293,40 @@ export function InquiryDialog() {
         )}
 
         <div className="flex justify-between pt-4">
-          {step > 1 ? (
-            <Button variant="outline" onClick={handleBack}>
+          {step > 1 && !isSuccessScreen ? (
+            <Button variant="outline" onClick={handleBack} disabled={submitting}>
               Back
             </Button>
           ) : (
             <div />
           )}
 
-          {isFinalScreen ? (
-            <Button
-              onClick={handleSendInquiry}
-              className="bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]"
-            >
-              Email Now
-            </Button>
-          ) : (
+          {isQualificationStep && (
             <Button
               onClick={handleNext}
-              disabled={!canProceed}
+              disabled={!canProceedQualification}
               className="bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]"
             >
               Next
+            </Button>
+          )}
+
+          {isContactStep && (
+            <Button
+              onClick={handleSubmit}
+              disabled={!canSubmitContact}
+              className="bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]"
+            >
+              {submitting ? "Submitting\u2026" : "Submit"}
+            </Button>
+          )}
+
+          {isSuccessScreen && (
+            <Button
+              onClick={() => handleOpenChange(false)}
+              className="bg-[rgb(68,68,68)] hover:bg-[rgb(88,88,88)]"
+            >
+              Close
             </Button>
           )}
         </div>
