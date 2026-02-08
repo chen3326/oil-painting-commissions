@@ -286,6 +286,12 @@ export function InquiryDialog() {
               We&apos;ll reach out to you shortly via email.
             </p>
             <p className="text-sm text-muted-foreground">
+              You&apos;re also welcome to reach us first directly at{" "}
+              <a href="mailto:hello@anthonydunnatelier.com" className="underline hover:text-foreground transition-colors">
+                hello@anthonydunnatelier.com
+              </a>
+            </p>
+            <p className="text-sm text-muted-foreground">
               Most inquiries are answered within 12 hours.
             </p>
           </div>
