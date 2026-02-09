@@ -193,7 +193,7 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
     question:
       "Can you match a specific style or replicate another artist's work?",
     answer:
-      "I am able to paint in various styles. While I cannot replicate another artist's work exactly, I welcome references—if there is a piece you admire, please share it with me. I am often able to draw close to the style or settings you have in mind.",
+      "I am able to paint in various styles. If there is a piece you admire, please share it with me—I am able to recreate it or draw close to the style and settings you have in mind.",
   },
   {
     question: "Do you paint from life?",
