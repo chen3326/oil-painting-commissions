@@ -13,11 +13,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 const STEPS = [
   {
     question: "What would you like painted?",
     key: "subject" as const,
+    type: "radio" as const,
     options: [
       { value: "individual", label: "Individual portrait" },
       { value: "group", label: "Group or couple portrait" },
@@ -29,6 +31,7 @@ const STEPS = [
   {
     question: "Which size are you considering?",
     key: "size" as const,
+    type: "radio" as const,
     options: [
       {
         value: "intimate",
@@ -63,8 +66,15 @@ const STEPS = [
     ],
   },
   {
+    question: "Tell me about the subject.",
+    subtitle: "The occasion or purpose, any background that might help.",
+    key: "description" as const,
+    type: "textarea" as const,
+  },
+  {
     question: "Timeline?",
     key: "timeline" as const,
+    type: "radio" as const,
     options: [
       { value: "no-rush", label: "No rush" },
       { value: "6-weeks", label: "Within 6 weeks" },
@@ -75,6 +85,7 @@ const STEPS = [
   {
     question: "Do you have a reference photo ready?",
     key: "reference" as const,
+    type: "radio" as const,
     options: [
       { value: "yes", label: "Yes, I have one ready" },
       { value: "soon", label: "I will pick one soon" },
@@ -84,6 +95,7 @@ const STEPS = [
   {
     question: "Are you ready to begin a commission?",
     key: "ready" as const,
+    type: "radio" as const,
     options: [
       { value: "yes", label: "Yes, I'm ready to proceed" },
       { value: "considering", label: "I'm considering one" },
@@ -94,6 +106,7 @@ const STEPS = [
 
 type Answers = {
   subject: string;
+  description: string;
   size: string;
   timeline: string;
   reference: string;
@@ -111,6 +124,7 @@ export function InquiryDialog() {
   const [step, setStep] = useState(1);
   const [answers, setAnswers] = useState<Answers>({
     subject: "",
+    description: "",
     size: "",
     timeline: "",
     reference: "",
@@ -184,7 +198,7 @@ export function InquiryDialog() {
     setOpen(newOpen);
     if (!newOpen) {
       setStep(1);
-      setAnswers({ subject: "", size: "", timeline: "", reference: "", ready: "" });
+      setAnswers({ subject: "", description: "", size: "", timeline: "", reference: "", ready: "" });
       setName("");
       setEmail("");
       setPhone("");
@@ -215,43 +229,59 @@ export function InquiryDialog() {
           </DialogTitle>
         </DialogHeader>
 
-        {/* Steps 1-3: Qualification radio groups */}
+        {/* Qualification steps */}
         {isQualificationStep && currentStep && (
           <div className="py-4">
-            <p className="text-lg mb-6">{currentStep.question}</p>
-            <RadioGroup
-              value={answers[currentStep.key]}
-              onValueChange={(v) =>
-                setAnswers({ ...answers, [currentStep.key]: v })
-              }
-              className="space-y-3"
-            >
-              {currentStep.options.map((option) => (
-                <label
-                  key={option.value}
-                  htmlFor={option.value}
-                  className="flex items-center gap-3 min-h-[44px] py-1 cursor-pointer"
-                >
-                  <RadioGroupItem
-                    value={option.value}
-                    id={option.value}
-                  />
-                  <div>
-                    <span className="text-base">{option.label}</span>
-                    {"description" in option && option.description && (
-                      <p className="text-sm text-muted-foreground mt-0.5">
-                        {option.description}
-                      </p>
-                    )}
-                    {"detail" in option && option.detail && (
-                      <p className="text-sm text-muted-foreground mt-0.5">
-                        {option.detail}
-                      </p>
-                    )}
-                  </div>
-                </label>
-              ))}
-            </RadioGroup>
+            <p className="text-lg mb-1">{currentStep.question}</p>
+            {"subtitle" in currentStep && currentStep.subtitle && (
+              <p className="text-sm text-muted-foreground mb-6">{currentStep.subtitle}</p>
+            )}
+            {!("subtitle" in currentStep && currentStep.subtitle) && <div className="mb-5" />}
+            {currentStep.type === "radio" && "options" in currentStep && (
+              <RadioGroup
+                value={answers[currentStep.key]}
+                onValueChange={(v) =>
+                  setAnswers({ ...answers, [currentStep.key]: v })
+                }
+                className="space-y-3"
+              >
+                {currentStep.options.map((option) => (
+                  <label
+                    key={option.value}
+                    htmlFor={option.value}
+                    className="flex items-center gap-3 min-h-[44px] py-1 cursor-pointer"
+                  >
+                    <RadioGroupItem
+                      value={option.value}
+                      id={option.value}
+                    />
+                    <div>
+                      <span className="text-base">{option.label}</span>
+                      {"description" in option && option.description && (
+                        <p className="text-sm text-muted-foreground mt-0.5">
+                          {option.description}
+                        </p>
+                      )}
+                      {"detail" in option && option.detail && (
+                        <p className="text-sm text-muted-foreground mt-0.5">
+                          {option.detail}
+                        </p>
+                      )}
+                    </div>
+                  </label>
+                ))}
+              </RadioGroup>
+            )}
+            {currentStep.type === "textarea" && (
+              <Textarea
+                value={answers[currentStep.key]}
+                onChange={(e) =>
+                  setAnswers({ ...answers, [currentStep.key]: e.target.value })
+                }
+                className="min-h-[200px]"
+                placeholder="e.g. A 50th wedding anniversary gift featuring my parents in their garden…"
+              />
+            )}
           </div>
         )}
 
