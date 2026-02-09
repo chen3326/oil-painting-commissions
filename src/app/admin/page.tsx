@@ -12,6 +12,8 @@ interface Lead {
   phone: string;
   subject: string;
   size: string;
+  timeline: string;
+  reference: string;
   ready: string;
   created_at: string;
 }
@@ -158,6 +160,8 @@ export default function AdminPage() {
                   <th className="px-4 py-3 font-medium">Phone</th>
                   <th className="px-4 py-3 font-medium">Subject</th>
                   <th className="px-4 py-3 font-medium">Size</th>
+                  <th className="px-4 py-3 font-medium">Timeline</th>
+                  <th className="px-4 py-3 font-medium">Reference</th>
                   <th className="px-4 py-3 font-medium">Ready</th>
                   <th className="px-4 py-3 font-medium">Actions</th>
                 </tr>
@@ -187,6 +191,8 @@ export default function AdminPage() {
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap">{lead.subject}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{lead.size}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">{lead.timeline}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">{lead.reference}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{lead.ready}</td>
                     <td className="px-4 py-3 whitespace-nowrap">
                       <Button

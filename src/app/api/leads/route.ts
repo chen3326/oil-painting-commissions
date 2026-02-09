@@ -7,6 +7,8 @@ interface LeadData {
   phone: string;
   subject: string;
   size: string;
+  timeline: string;
+  reference: string;
   ready: string;
   created_at: string;
 }
@@ -14,7 +16,7 @@ interface LeadData {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, phone, subject, size, ready } = body;
+    const { name, email, phone, subject, size, timeline, reference, ready } = body;
 
     // Validate required fields
     if (!name || !email || !phone) {
@@ -38,6 +40,8 @@ export async function POST(request: NextRequest) {
       phone: phone.trim(),
       subject: subject || "",
       size: size || "",
+      timeline: timeline || "",
+      reference: reference || "",
       ready: ready || "",
       created_at: new Date().toISOString(),
     };

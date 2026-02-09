@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+
 import { Input } from "@/components/ui/input";
 
 const STEPS = [
@@ -62,6 +63,25 @@ const STEPS = [
     ],
   },
   {
+    question: "Timeline?",
+    key: "timeline" as const,
+    options: [
+      { value: "no-rush", label: "No rush" },
+      { value: "6-weeks", label: "Within 6 weeks" },
+      { value: "specific-date", label: "For a specific date" },
+      { value: "not-sure", label: "Not sure" },
+    ],
+  },
+  {
+    question: "Do you have a reference photo ready?",
+    key: "reference" as const,
+    options: [
+      { value: "yes", label: "Yes, I have one ready" },
+      { value: "soon", label: "I will pick one soon" },
+      { value: "not-yet", label: "Not yet" },
+    ],
+  },
+  {
     question: "Are you ready to begin a commission?",
     key: "ready" as const,
     options: [
@@ -75,6 +95,8 @@ const STEPS = [
 type Answers = {
   subject: string;
   size: string;
+  timeline: string;
+  reference: string;
   ready: string;
 };
 
@@ -90,6 +112,8 @@ export function InquiryDialog() {
   const [answers, setAnswers] = useState<Answers>({
     subject: "",
     size: "",
+    timeline: "",
+    reference: "",
     ready: "",
   });
   const [name, setName] = useState("");
@@ -160,7 +184,7 @@ export function InquiryDialog() {
     setOpen(newOpen);
     if (!newOpen) {
       setStep(1);
-      setAnswers({ subject: "", size: "", ready: "" });
+      setAnswers({ subject: "", size: "", timeline: "", reference: "", ready: "" });
       setName("");
       setEmail("");
       setPhone("");
@@ -186,8 +210,8 @@ export function InquiryDialog() {
             {isSuccessScreen
               ? "Thank you!"
               : isContactStep
-                ? "Step 4 of 4"
-                : `Step ${step} of 4`}
+                ? `Step ${totalQualificationSteps + 1} of ${totalQualificationSteps + 1}`
+                : `Step ${step} of ${totalQualificationSteps + 1}`}
           </DialogTitle>
         </DialogHeader>
 
@@ -203,18 +227,17 @@ export function InquiryDialog() {
               className="space-y-3"
             >
               {currentStep.options.map((option) => (
-                <div key={option.value} className="flex items-center gap-3 min-h-[44px] py-1">
+                <label
+                  key={option.value}
+                  htmlFor={option.value}
+                  className="flex items-center gap-3 min-h-[44px] py-1 cursor-pointer"
+                >
                   <RadioGroupItem
                     value={option.value}
                     id={option.value}
                   />
                   <div>
-                    <Label
-                      htmlFor={option.value}
-                      className="cursor-pointer text-base"
-                    >
-                      {option.label}
-                    </Label>
+                    <span className="text-base">{option.label}</span>
                     {"description" in option && option.description && (
                       <p className="text-sm text-muted-foreground mt-0.5">
                         {option.description}
@@ -226,7 +249,7 @@ export function InquiryDialog() {
                       </p>
                     )}
                   </div>
-                </div>
+                </label>
               ))}
             </RadioGroup>
           </div>
