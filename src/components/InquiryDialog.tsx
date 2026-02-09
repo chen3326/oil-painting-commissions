@@ -33,29 +33,23 @@ const STEPS = [
     key: "size" as const,
     type: "radio" as const,
     options: [
-      {
-        value: "intimate",
-        label: 'Intimate — Up to 12" × 16"',
-        description: "Perfect for tabletop display or smaller spaces",
-        detail: "From $1,200 · 2–4 weeks",
-      },
-      {
+{
         value: "classic",
         label: 'Classic — Up to 18" × 24"',
         description: "The standard size for wall-mounted portraits",
-        detail: "From $3,000 · 2–4 weeks",
+        detail: "Est. $3,000 · 2–4 weeks",
       },
       {
         value: "statement",
         label: 'Statement — Up to 30" × 40"',
         description: "A commanding presence for larger wall spaces",
-        detail: "From $12,000 · 4–6 weeks",
+        detail: "Est. $12,000 · 4–6 weeks",
       },
       {
         value: "grand",
         label: 'Grand — 48" × 60" and above',
         description: "Gallery-scale works for grand interiors",
-        detail: "From $30,000+ · 6+ weeks",
+        detail: "Est. $30,000+ · 6+ weeks",
       },
       {
         value: "not-sure",

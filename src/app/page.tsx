@@ -89,32 +89,30 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
             <tr className="border-b">
               <th className="text-left py-2 pr-4">Size</th>
               <th className="text-left py-2 pr-4">Dimensions</th>
+              <th className="text-left py-2 pr-4">Description</th>
               <th className="text-left py-2 pr-4">Typical Timeline</th>
-              <th className="text-left py-2">Starting At</th>
+              <th className="text-left py-2">Estimate</th>
             </tr>
           </thead>
           <tbody>
             <tr className="border-b">
-              <td className="py-2 pr-4">Intimate</td>
-              <td className="py-2 pr-4">12&quot; x 16&quot;</td>
-              <td className="py-2 pr-4">2–4 weeks</td>
-              <td className="py-2">$1,200</td>
-            </tr>
-            <tr className="border-b">
               <td className="py-2 pr-4">Classic</td>
-              <td className="py-2 pr-4">18&quot; x 24&quot;</td>
+              <td className="py-2 pr-4">Up to 18&quot; x 24&quot;</td>
+              <td className="py-2 pr-4">The standard size for wall-mounted portraits</td>
               <td className="py-2 pr-4">2–4 weeks</td>
               <td className="py-2">$3,000</td>
             </tr>
             <tr className="border-b">
               <td className="py-2 pr-4">Statement</td>
-              <td className="py-2 pr-4">30&quot; x 40&quot;</td>
+              <td className="py-2 pr-4">Up to 30&quot; x 40&quot;</td>
+              <td className="py-2 pr-4">A commanding presence for larger wall spaces</td>
               <td className="py-2 pr-4">4–6 weeks</td>
               <td className="py-2">$12,000</td>
             </tr>
             <tr>
               <td className="py-2 pr-4">Grand</td>
               <td className="py-2 pr-4">48&quot; x 60&quot;+</td>
+              <td className="py-2 pr-4">Gallery-scale works for grand interiors</td>
               <td className="py-2 pr-4">6+ weeks</td>
               <td className="py-2">$30,000+</td>
             </tr>
@@ -124,11 +122,10 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
           Custom dimensions within any size category can be accommodated.
         </p>
         <p className="mb-4">
-          <strong>Choosing a size:</strong> For pets or lighthearted portraits,
-          most clients find the Intimate size perfectly suited—a piece that can
-          rest on a table or fit comfortably in a study. For serious portraits
-          or compositions with multiple subjects, a minimum of Classic is
-          required to allow sufficient space for detail.
+          <strong>Choosing a size:</strong> For most portraits,
+          clients find the Classic size perfectly suited—the standard for
+          wall-mounted pieces. For compositions with multiple subjects, a
+          larger size is recommended to allow sufficient space for detail.
         </p>
         <p className="mb-4">
           The Statement and Grand sizes are designed for psychological impact
