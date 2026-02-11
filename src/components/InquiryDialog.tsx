@@ -289,11 +289,6 @@ export function InquiryDialog() {
                           {option.description}
                         </p>
                       )}
-                      {"detail" in option && option.detail && (
-                        <p className="text-sm text-muted-foreground mt-0.5">
-                          {option.detail}
-                        </p>
-                      )}
                     </div>
                   </label>
                 ))}
