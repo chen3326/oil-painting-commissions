@@ -19,31 +19,33 @@ import ImageViewer_Basic from "@/components/commerce-ui/image-viewer-basic";
 
 const CONTACT_EMAIL = "hello@anthonydunnatelier.com";
 
-const galleryItems = [
-  "/gallery/1.jpg",
-  "/gallery/2.jpg",
-  "/gallery/3.jpg",
-  "/gallery/4.jpg",
-  "/gallery/6.JPG",
-  "/gallery/7 .jpg",
-  "/gallery/8.jpg",
-  "/gallery/9.jpg",
-  "/gallery/10.jpg",
-  "/gallery/11.JPG",
-  "/gallery/12.jpg",
-  "/gallery/13.jpg",
-  "/gallery/14.JPG",
-  "/gallery/15.jpg",
-  "/gallery/16.jpg",
-  "/gallery/17.jpg",
-  "/gallery/18.JPG",
-  "/gallery/19.JPG",
-  "/gallery/20.jpg",
-  "/gallery/21.jpg",
-  "/gallery/22.JPG",
-  "/gallery/23.JPG",
-  "/gallery/24.JPG",
-  "/gallery/25.JPG",
+const galleryItems: { src: string; footnote?: string }[] = [
+  { src: "/gallery/b1.jpg", footnote: "Old Masters\u2019 indirect painting method with multi-layered transparent glazes. Please inquire separately." },
+  { src: "/gallery/b2.jpg" },
+  { src: "/gallery/b3.jpg", footnote: "Old Masters\u2019 indirect painting method with multi-layered transparent glazes. Please inquire separately." },
+  { src: "/gallery/b4.JPG" },
+  { src: "/gallery/b5.jpg" },
+  { src: "/gallery/b6.JPG" },
+  { src: "/gallery/b7.jpg" },
+  { src: "/gallery/b8.jpg" },
+  { src: "/gallery/b9.JPG" },
+  { src: "/gallery/b10.JPG" },
+  { src: "/gallery/b11.jpg" },
+  { src: "/gallery/b12.jpg" },
+  { src: "/gallery/b13.jpg" },
+  { src: "/gallery/b14.jpg" },
+  { src: "/gallery/b15.jpg" },
+  { src: "/gallery/b16.jpg" },
+  { src: "/gallery/b17.jpg" },
+  { src: "/gallery/b18.jpg" },
+  { src: "/gallery/b19.jpg" },
+  { src: "/gallery/b20.jpg" },
+  { src: "/gallery/b21.jpg" },
+  { src: "/gallery/b22.JPG" },
+  { src: "/gallery/b23.JPG" },
+  { src: "/gallery/b24.jpg" },
+  { src: "/gallery/b25.jpg" },
+  { src: "/gallery/b26.JPG" },
 ];
 
 const faqItems: { question: string; answer: React.ReactNode }[] = [
@@ -222,49 +224,48 @@ const faqItems: { question: string; answer: React.ReactNode }[] = [
   },
 ];
 
-// Group gallery items into slides of 6 (2 rows × 3 columns)
-const gallerySlides: string[][] = [];
-for (let i = 0; i < galleryItems.length; i += 6) {
-  gallerySlides.push(galleryItems.slice(i, i + 6));
+// Group gallery items into columns of 2 (vertical pairs)
+const galleryColumns: { src: string; footnote?: string }[][] = [];
+for (let i = 0; i < galleryItems.length; i += 2) {
+  galleryColumns.push(galleryItems.slice(i, i + 2));
 }
 
 export default function Home() {
   return (
     <div>
       {/* Gallery Section */}
-      <section className="container mx-auto px-4 py-16">
-        <Carousel className="w-full">
-          <div className="flex justify-between mb-4 md:hidden">
-            <CarouselPrevious className="static translate-y-0" />
-            <CarouselNext className="static translate-y-0" />
-          </div>
-          <CarouselContent>
-            {gallerySlides.map((slide, slideIndex) => (
-              <CarouselItem key={slideIndex}>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {slide.map((src, index) => (
-                    <div key={index} className="overflow-hidden">
-                      <ImageViewer_Basic
-                        imageUrl={src}
-                        imageTitle={`Gallery painting ${slideIndex * 6 + index + 1}`}
-                      >
-                        <Image
-                          src={src}
-                          alt={`Gallery painting ${slideIndex * 6 + index + 1}`}
-                          width={800}
-                          height={600}
-                          className="w-full h-auto transition-opacity hover:opacity-90"
-                          sizes="(max-width: 640px) 50vw, 33vw"
-                        />
-                      </ImageViewer_Basic>
+      <section className="py-16">
+        <Carousel opts={{ align: "start", loop: false, dragFree: true, containScroll: "trimSnaps" }} className="w-full">
+          <CarouselContent className="-ml-14 py-8">
+            <CarouselItem className="basis-0 min-w-8 pl-0" />
+            {galleryColumns.map((pair, colIndex) => (
+              <CarouselItem key={colIndex} className="basis-[40%] sm:basis-[25%] lg:basis-[18%] xl:basis-[14%] 2xl:basis-[11%] pl-14">
+                <div className="flex flex-col gap-14">
+                  {pair.map((item, imgIndex) => (
+                    <div key={imgIndex}>
+                      <div className="h-[250px] flex items-center justify-center">
+                        <ImageViewer_Basic
+                          imageUrl={item.src}
+                          imageTitle={`Gallery painting ${colIndex * 2 + imgIndex + 1}`}
+                        >
+                          <Image
+                            src={item.src}
+                            alt={`Gallery painting ${colIndex * 2 + imgIndex + 1}`}
+                            width={800}
+                            height={600}
+                            className="max-w-full max-h-[250px] w-auto h-auto object-contain transition-opacity hover:opacity-90"
+                            sizes="33vw"
+                          />
+                        </ImageViewer_Basic>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-2 text-center italic h-[2.5rem]">{item.footnote ?? "\u00A0"}</p>
                     </div>
                   ))}
                 </div>
               </CarouselItem>
             ))}
+            <CarouselItem className="basis-0 min-w-8 pl-0" />
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
         </Carousel>
       </section>
 
