@@ -43,39 +43,46 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
             <tr className="border-b">
               <th className="text-left py-2 pr-4">Size</th>
               <th className="text-left py-2 pr-4">Dimensions</th>
-              <th className="text-left py-2 pr-4">Description</th>
               <th className="text-left py-2 pr-4">Typical Timeline</th>
               <th className="text-left py-2">Estimate</th>
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b">
-              <td className="py-2 pr-4">Classic</td>
-              <td className="py-2 pr-4">24&quot; × 36&quot;</td>
-              <td className="py-2 pr-4">The standard size for wall-mounted portraits</td>
-              <td className="py-2 pr-4">2–4 weeks</td>
-              <td className="py-2">$3,000–$5,000</td>
+            <tr>
+              <td className="pt-2 pr-4">Classic</td>
+              <td className="pt-2 pr-4">24&quot; × 36&quot;</td>
+              <td className="pt-2 pr-4">2–4 weeks</td>
+              <td className="pt-2">$3,000–$5,000</td>
             </tr>
             <tr className="border-b">
-              <td className="py-2 pr-4">Statement</td>
-              <td className="py-2 pr-4">36&quot; × 48&quot;</td>
-              <td className="py-2 pr-4">A commanding presence for larger wall spaces</td>
-              <td className="py-2 pr-4">4–6 weeks</td>
-              <td className="py-2">$5,000–$12,000</td>
-            </tr>
-            <tr className="border-b">
-              <td className="py-2 pr-4">Grand</td>
-              <td className="py-2 pr-4">48&quot; × 64&quot;+</td>
-              <td className="py-2 pr-4">Gallery-scale works for grand interiors</td>
-              <td className="py-2 pr-4">6+ weeks</td>
-              <td className="py-2">$8,000–$25,000</td>
+              <td colSpan={4} className="pb-2 text-sm text-muted-foreground">The standard size for wall-mounted portraits</td>
             </tr>
             <tr>
-              <td className="py-2 pr-4">Indirect technique</td>
-              <td className="py-2 pr-4">Any of the above</td>
-              <td className="py-2 pr-4">Old Masters&apos; indirect painting method with multi-layered transparent glazes</td>
-              <td className="py-2 pr-4">Varies</td>
-              <td className="py-2">3–5× the above</td>
+              <td className="pt-2 pr-4">Statement</td>
+              <td className="pt-2 pr-4">36&quot; × 48&quot;</td>
+              <td className="pt-2 pr-4">4–6 weeks</td>
+              <td className="pt-2">$5,000–$12,000</td>
+            </tr>
+            <tr className="border-b">
+              <td colSpan={4} className="pb-2 text-sm text-muted-foreground">A commanding presence for larger wall spaces</td>
+            </tr>
+            <tr>
+              <td className="pt-2 pr-4">Grand</td>
+              <td className="pt-2 pr-4">48&quot; × 64&quot;+</td>
+              <td className="pt-2 pr-4">6+ weeks</td>
+              <td className="pt-2">$8,000–$25,000</td>
+            </tr>
+            <tr className="border-b">
+              <td colSpan={4} className="pb-2 text-sm text-muted-foreground">Gallery-scale works for grand interiors</td>
+            </tr>
+            <tr>
+              <td className="pt-2 pr-4">Indirect technique</td>
+              <td className="pt-2 pr-4">Any of the above</td>
+              <td className="pt-2 pr-4">Varies</td>
+              <td className="pt-2">3–5× the above</td>
+            </tr>
+            <tr>
+              <td colSpan={4} className="pb-2 text-sm text-muted-foreground">Old Masters&apos; indirect painting method with multi-layered transparent glazes</td>
             </tr>
           </tbody>
         </table>
