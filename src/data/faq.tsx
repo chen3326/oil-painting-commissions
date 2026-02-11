@@ -151,12 +151,12 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
   {
     question: "Can you work from old or low-quality photos?",
     answer:
-      "Yes. I have created pieces from old black-and-white family photos, and it is not an issue.",
+      "Yes, I have done it before and it is not an issue. A high-quality reference photo is always preferred, but not required.",
   },
   {
     question: "Can the painting differ from my photo?",
     answer:
-      "Absolutely. In fact, a photo is not strictly required for me to begin working. If you do provide a reference photo, I can adjust the subject, posture, lighting, background—nearly everything—based on your needs. For example, if you have separate photos of different people, I can combine them into a group portrait. This is not an issue.",
+      "Absolutely. I can adjust the subject, posture, lighting, background—nearly everything—based on your needs. For example, if you have separate photos of different people, I can combine them into a group portrait. This is not an issue.",
   },
   {
     question:
@@ -172,12 +172,12 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
   {
     question: "Can I expedite my commission?",
     answer:
-      "If your commission is a gift and you have a specific date in mind, I will do my best to accommodate your timeline at no additional charge. However, please allow a minimum of two weeks even for simpler pieces—this is the nature of oil painting, which requires time for the paint to dry between layers. I do not deliver incomplete work under any circumstances.",
+      "If your commission is a gift and you have a specific date in mind, I will do my best to accommodate your timeline at no additional charge. However, please allow a minimum of two weeks even for simpler and smaller pieces.",
   },
   {
     question: "Do you offer framing?",
     answer:
-      "Yes, a standard frame is included with your painting. If you would prefer a custom frame or need guidance selecting one, feel free to reach out.",
+      "Yes, a standard frame is included with your painting. Once the piece is finished, custom framing options are also available at additional cost.",
   },
   {
     question: "How is the painting delivered?",
