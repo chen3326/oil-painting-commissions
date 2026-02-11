@@ -239,7 +239,7 @@ export default function Home() {
           <CarouselContent className="-ml-14 py-8">
             <CarouselItem className="basis-0 min-w-8 pl-0" />
             {galleryColumns.map((pair, colIndex) => (
-              <CarouselItem key={colIndex} className="basis-[40%] sm:basis-[25%] lg:basis-[18%] xl:basis-[14%] 2xl:basis-[11%] pl-14">
+              <CarouselItem key={colIndex} className="basis-[38%] sm:basis-[25%] lg:basis-[18%] xl:basis-[14%] 2xl:basis-[11%] pl-14">
                 <div className="flex flex-col gap-14">
                   {pair.map((item, imgIndex) => (
                     <div key={imgIndex}>
