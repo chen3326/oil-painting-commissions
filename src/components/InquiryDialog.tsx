@@ -179,7 +179,7 @@ export function InquiryDialog() {
     setSubmitting(true);
 
     // Fire Lead event for qualified leads before API call
-    const isQualified = answers.ready !== "browsing";
+    const isQualified = answers.ready !== "browsing" && answers.budget !== "under-3k";
     if (isQualified) {
       trackLead();
     }
