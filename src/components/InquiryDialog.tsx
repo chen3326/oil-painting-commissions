@@ -11,9 +11,20 @@ import {
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { faqItems } from "@/data/faq";
+
+const pricingFaq = faqItems.find((item) =>
+  item.question.includes("how much does it cost")
+)!;
 
 const STEPS = [
   {
@@ -33,30 +44,39 @@ const STEPS = [
     key: "size" as const,
     type: "radio" as const,
     options: [
-{
+      {
         value: "classic",
-        label: 'Classic — Up to 18" × 24"',
+        label: 'Classic — 24" × 36"',
         description: "The standard size for wall-mounted portraits",
-        detail: "Est. $3,000 · 2–4 weeks",
       },
       {
         value: "statement",
-        label: 'Statement — Up to 30" × 40"',
+        label: 'Statement — 36" × 48"',
         description: "A commanding presence for larger wall spaces",
-        detail: "Est. $12,000 · 4–6 weeks",
       },
       {
         value: "grand",
-        label: 'Grand — 48" × 60" and above',
+        label: 'Grand — 48" × 64" and above',
         description: "Gallery-scale works for grand interiors",
-        detail: "Est. $30,000+ · 6+ weeks",
       },
       {
         value: "not-sure",
         label: "Not sure yet",
         description: "I'd like guidance on the right size",
-        detail: "",
       },
+    ],
+  },
+  {
+    question: "Do you have a budget range in mind?",
+    key: "budget" as const,
+    type: "radio" as const,
+    options: [
+      { value: "under-3k", label: "Under $3,000" },
+      { value: "3k-5k", label: "$3,000 – $5,000" },
+      { value: "5k-10k", label: "$5,000 – $10,000" },
+      { value: "10k-25k", label: "$10,000 – $25,000" },
+      { value: "25k-plus", label: "$25,000+" },
+      { value: "flexible", label: "Flexible / not sure yet" },
     ],
   },
   {
@@ -102,9 +122,11 @@ type Answers = {
   subject: string;
   description: string;
   size: string;
+  budget: string;
   timeline: string;
   reference: string;
   ready: string;
+  contactPreference: string;
 };
 
 function trackLead() {
@@ -120,9 +142,11 @@ export function InquiryDialog() {
     subject: "",
     description: "",
     size: "",
+    budget: "",
     timeline: "",
     reference: "",
     ready: "",
+    contactPreference: "",
   });
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -131,15 +155,15 @@ export function InquiryDialog() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  const totalQualificationSteps = STEPS.length; // 3
+  const totalQualificationSteps = STEPS.length;
   const isQualificationStep = step <= totalQualificationSteps;
-  const isContactStep = step === totalQualificationSteps + 1; // step 4
-  const isSuccessScreen = step === totalQualificationSteps + 2; // step 5
+  const isContactStep = step === totalQualificationSteps + 1;
+  const isSuccessScreen = step === totalQualificationSteps + 2;
 
   const currentStep = isQualificationStep ? STEPS[step - 1] : null;
   const canProceedQualification = currentStep && answers[currentStep.key];
   const canSubmitContact =
-    name.trim() && email.trim() && phone.trim() && !submitting;
+    name.trim() && email.trim() && phone.trim() && answers.contactPreference && !submitting;
 
   const handleNext = () => {
     setStep(step + 1);
@@ -192,7 +216,16 @@ export function InquiryDialog() {
     setOpen(newOpen);
     if (!newOpen) {
       setStep(1);
-      setAnswers({ subject: "", description: "", size: "", timeline: "", reference: "", ready: "" });
+      setAnswers({
+        subject: "",
+        description: "",
+        size: "",
+        budget: "",
+        timeline: "",
+        reference: "",
+        ready: "",
+        contactPreference: "",
+      });
       setName("");
       setEmail("");
       setPhone("");
@@ -212,7 +245,7 @@ export function InquiryDialog() {
           Commission Inquiry
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
             {isSuccessScreen
@@ -279,11 +312,12 @@ export function InquiryDialog() {
           </div>
         )}
 
-        {/* Step 4: Contact info */}
+        {/* Contact info step */}
         {isContactStep && (
-          <div className="py-4 space-y-4">
-            <p className="text-lg mb-6">How can I reach you?</p>
-            <div className="space-y-3">
+          <div className="py-4">
+            <p className="text-lg mb-1">Your contact details</p>
+            <div className="mb-5" />
+            <div className="space-y-5">
               <div>
                 <Label htmlFor="lead-name" className="mb-1.5">
                   Name
@@ -320,6 +354,34 @@ export function InquiryDialog() {
                 />
               </div>
             </div>
+            <div className="border-t pt-4 mt-4">
+              <p className="text-base font-medium mb-1.5">How would you prefer to be contacted?</p>
+              <RadioGroup
+                value={answers.contactPreference}
+                onValueChange={(v) =>
+                  setAnswers({ ...answers, contactPreference: v })
+                }
+                className="space-y-3 mt-2"
+              >
+                {[
+                  { value: "email", label: "Email" },
+                  { value: "phone", label: "Phone call" },
+                  { value: "sms", label: "Text message (SMS)" },
+                ].map((option) => (
+                  <label
+                    key={option.value}
+                    htmlFor={`contact-pref-${option.value}`}
+                    className="flex items-center gap-3 min-h-[44px] py-1 cursor-pointer"
+                  >
+                    <RadioGroupItem
+                      value={option.value}
+                      id={`contact-pref-${option.value}`}
+                    />
+                    <span className="text-base">{option.label}</span>
+                  </label>
+                ))}
+              </RadioGroup>
+            </div>
             {error && (
               <p className="text-sm text-red-600">{error}</p>
             )}
@@ -330,7 +392,7 @@ export function InquiryDialog() {
         {isSuccessScreen && (
           <div className="py-4 space-y-4">
             <p className="text-lg">
-              I&apos;ll reach out to you shortly via email.
+              I&apos;ll reach out to you shortly.
             </p>
             <p className="text-sm text-muted-foreground">
               You&apos;re also welcome to reach me first directly at{" "}
@@ -341,6 +403,22 @@ export function InquiryDialog() {
             <p className="text-sm text-muted-foreground">
               Most inquiries are answered within 12 hours.
             </p>
+          </div>
+        )}
+
+        {/* Pricing FAQ on budget step only */}
+        {currentStep?.key === "budget" && (
+          <div className="border-t pt-4">
+            <Accordion type="single" collapsible>
+              <AccordionItem value="pricing-faq" className="border-b-0">
+                <AccordionTrigger className="text-left text-sm text-muted-foreground hover:text-foreground">
+                  {pricingFaq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-sm">
+                  {pricingFaq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         )}
 

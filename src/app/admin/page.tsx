@@ -13,9 +13,11 @@ interface Lead {
   subject: string;
   description: string;
   size: string;
+  budget: string;
   timeline: string;
   reference: string;
   ready: string;
+  contact_preference: string;
   created_at: string;
 }
 
@@ -162,9 +164,11 @@ export default function AdminPage() {
                   <th className="px-4 py-3 font-medium">Subject</th>
                   <th className="px-4 py-3 font-medium">Description</th>
                   <th className="px-4 py-3 font-medium">Size</th>
+                  <th className="px-4 py-3 font-medium">Budget</th>
                   <th className="px-4 py-3 font-medium">Timeline</th>
                   <th className="px-4 py-3 font-medium">Reference</th>
                   <th className="px-4 py-3 font-medium">Ready</th>
+                  <th className="px-4 py-3 font-medium">Contact Pref.</th>
                   <th className="px-4 py-3 font-medium">Actions</th>
                 </tr>
               </thead>
@@ -194,9 +198,11 @@ export default function AdminPage() {
                     <td className="px-4 py-3 whitespace-nowrap">{lead.subject}</td>
                     <td className="px-4 py-3 max-w-[200px]">{lead.description}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{lead.size}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">{lead.budget}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{lead.timeline}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{lead.reference}</td>
                     <td className="px-4 py-3 whitespace-nowrap">{lead.ready}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">{lead.contact_preference}</td>
                     <td className="px-4 py-3 whitespace-nowrap">
                       <Button
                         variant="outline"

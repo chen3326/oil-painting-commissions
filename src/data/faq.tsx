@@ -1,0 +1,185 @@
+import React from "react";
+
+export const faqItems: { question: string; answer: React.ReactNode }[] = [
+  {
+    question: "What is the commission process like?",
+    answer: (
+      <>
+        <p className="mb-4">
+          It begins with a conversation. Send me your inquiry—ideally with the
+          details outlined in &quot;What do you need from me to get
+          started?&quot;—and I will reply with a quote. If anything is missing,
+          I will reach out for additional details.
+        </p>
+        <p className="mb-4">
+          A 20% deposit is required to begin work after I gather all the details
+          from you. I will then provide a preliminary draft for your review. At
+          this stage, significant changes can still be made, and I welcome your
+          input. Once the direction is confirmed, I proceed with the final
+          painting. For larger or more complex works, I will share progress
+          images along the way.
+        </p>
+        <p>
+          When the painting is complete, the remaining balance is due. Then
+          shipping will be arranged.
+        </p>
+      </>
+    ),
+  },
+  {
+    question: "How long does a commission take, and how much does it cost?",
+    answer: (
+      <>
+        <p className="mb-4">
+          For most paintings, it takes 2–6 weeks to complete the work. Shipping
+          can take up to an additional week.
+        </p>
+        <p className="mb-4">
+          Timeline and pricing depend on size, complexity, and technique. Below
+          is a general guide:
+        </p>
+        <table className="w-full mb-4 text-base md:text-sm border-collapse">
+          <thead>
+            <tr className="border-b">
+              <th className="text-left py-2 pr-4">Size</th>
+              <th className="text-left py-2 pr-4">Dimensions</th>
+              <th className="text-left py-2 pr-4">Description</th>
+              <th className="text-left py-2 pr-4">Typical Timeline</th>
+              <th className="text-left py-2">Estimate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b">
+              <td className="py-2 pr-4">Classic</td>
+              <td className="py-2 pr-4">24&quot; × 36&quot;</td>
+              <td className="py-2 pr-4">The standard size for wall-mounted portraits</td>
+              <td className="py-2 pr-4">2–4 weeks</td>
+              <td className="py-2">$3,000–$5,000</td>
+            </tr>
+            <tr className="border-b">
+              <td className="py-2 pr-4">Statement</td>
+              <td className="py-2 pr-4">36&quot; × 48&quot;</td>
+              <td className="py-2 pr-4">A commanding presence for larger wall spaces</td>
+              <td className="py-2 pr-4">4–6 weeks</td>
+              <td className="py-2">$5,000–$12,000</td>
+            </tr>
+            <tr className="border-b">
+              <td className="py-2 pr-4">Grand</td>
+              <td className="py-2 pr-4">48&quot; × 64&quot;+</td>
+              <td className="py-2 pr-4">Gallery-scale works for grand interiors</td>
+              <td className="py-2 pr-4">6+ weeks</td>
+              <td className="py-2">$8,000–$25,000</td>
+            </tr>
+            <tr>
+              <td className="py-2 pr-4">Indirect technique</td>
+              <td className="py-2 pr-4">Any of the above</td>
+              <td className="py-2 pr-4">Old Masters&apos; indirect painting method with multi-layered transparent glazes</td>
+              <td className="py-2 pr-4">Varies</td>
+              <td className="py-2">3–5× the above</td>
+            </tr>
+          </tbody>
+        </table>
+        <p className="mb-4">
+          Custom dimensions within any size category can be accommodated.
+        </p>
+        <p className="mb-4">
+          <strong>Choosing a size:</strong> For most portraits,
+          clients find the Classic size perfectly suited—the standard for
+          wall-mounted pieces. For compositions with multiple subjects, a
+          larger size is recommended to allow sufficient space for detail.
+        </p>
+        <p className="mb-4">
+          The Statement and Grand sizes are designed for psychological impact
+          and the greatest level of detail. When displayed in a well-chosen
+          location with proper lighting, these pieces command everyone for close
+          admiration.
+        </p>
+        <p className="mb-4">
+          If displayed prominently in its dedicated space, use lighting with
+          appropriate color temperature and a high color rendering index to
+          allow the colors of the painting to be shown faithfully. I have
+          experience with museum lighting solutions and am happy to advise if
+          you wish to display such a piece properly but don&apos;t know where to
+          start.
+        </p>
+        <p>
+          Complexity and technique both affect time and cost—a single portrait
+          differs from a multi-figure composition, and the Old Masters&apos;
+          indirect glazing method requires significantly more time and material.
+          Contact me with your details for an accurate quote.
+        </p>
+      </>
+    ),
+  },
+  {
+    question: "What do you need from me to get started?",
+    answer: (
+      <>
+        <p className="mb-4">
+          To begin, please share a reference photo—this is what the painting
+          will be based on. Multiple angles are helpful if available.
+        </p>
+        <p className="mb-4">
+          Let me know the style you have in mind. If you admire a particular
+          painting or artist, include it as a reference.
+        </p>
+        <p className="mb-4">
+          Tell me the size you are considering and where the painting will be
+          displayed.
+        </p>
+        <p className="mb-4">
+          Finally, share the background and purpose of the piece—who is the
+          subject, what the occasion is, and what you want the painting to
+          convey.
+        </p>
+        <p>If you are unsure about any of the above, I am happy to advise.</p>
+      </>
+    ),
+  },
+  {
+    question: "What subjects are accepted, and what subjects are not?",
+    answer:
+      "My passion is creating dignified portraits of people and animals that celebrate their lives. Many of my clients commission family portraits intended to be passed down as heirlooms. That said, I am skilled in most subjects. I do not accept commissions intended to satirize or mock the person being portrayed, regardless of whether they are a public figure. For animals, I paint most common subjects—cats, dogs, birds, horses—without issue. Exotic animals are evaluated on a case-by-case basis.",
+  },
+  {
+    question: "Can you work from old or low-quality photos?",
+    answer:
+      "Yes. I have created pieces from old black-and-white family photos, and it is not an issue.",
+  },
+  {
+    question: "Can the painting differ from my photo?",
+    answer:
+      "Absolutely. In fact, a photo is not strictly required for me to begin working. If you do provide a reference photo, I can adjust the subject, posture, lighting, background—nearly everything—based on your needs. For example, if you have separate photos of different people, I can combine them into a group portrait. This is not an issue.",
+  },
+  {
+    question:
+      "Can you match a specific style or replicate another artist's work?",
+    answer:
+      "I am able to paint in various styles. If there is a piece you admire, please share it with me—I am able to recreate it or draw close to the style and settings you have in mind.",
+  },
+  {
+    question: "Do you paint from life?",
+    answer:
+      "Yes, if you are located in Colorado. Please contact me at least one month in advance, and I may be able to accommodate a sitting.",
+  },
+  {
+    question: "Can I expedite my commission?",
+    answer:
+      "If your commission is a gift and you have a specific date in mind, I will do my best to accommodate your timeline at no additional charge. However, please allow a minimum of two weeks even for simpler pieces—this is the nature of oil painting, which requires time for the paint to dry between layers. I do not deliver incomplete work under any circumstances.",
+  },
+  {
+    question: "Do you offer framing?",
+    answer:
+      "Yes, a standard frame is included with your painting. If you would prefer a custom frame or need guidance selecting one, feel free to reach out.",
+  },
+  {
+    question: "How is the painting delivered?",
+    answer:
+      "Paintings are delivered worldwide, framed and secured in a custom crate.",
+  },
+  {
+    question: "How should I care for the painting?",
+    answer:
+      "Oil paintings are durable when cared for properly. The essentials: hang away from direct sunlight, heat sources, and moisture. Keep temperature and humidity stable. Dust occasionally with a soft, natural-hair brush—NEVER use water or household cleaners. Handle by the frame, not the canvas, and avoid touching the paint surface. If you ever notice flaking, discoloration, or damage, contact me or a professional conservator rather than attempting repairs yourself.",
+  },
+];

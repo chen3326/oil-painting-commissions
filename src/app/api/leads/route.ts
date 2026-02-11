@@ -8,16 +8,18 @@ interface LeadData {
   subject: string;
   description: string;
   size: string;
+  budget: string;
   timeline: string;
   reference: string;
   ready: string;
+  contact_preference: string;
   created_at: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, phone, subject, description, size, timeline, reference, ready } = body;
+    const { name, email, phone, subject, description, size, budget, timeline, reference, ready, contactPreference } = body;
 
     // Validate required fields
     if (!name || !email || !phone) {
@@ -42,9 +44,11 @@ export async function POST(request: NextRequest) {
       subject: subject || "",
       description: description || "",
       size: size || "",
+      budget: budget || "",
       timeline: timeline || "",
       reference: reference || "",
       ready: ready || "",
+      contact_preference: contactPreference || "",
       created_at: new Date().toISOString(),
     };
 
