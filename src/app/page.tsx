@@ -21,7 +21,7 @@ import { faqItems } from "@/data/faq";
 const CONTACT_EMAIL = "hello@anthonydunnatelier.com";
 
 const galleryItems: { src: string; footnote?: string }[] = [
-  { src: "/gallery/elegant-woman-in-black-dress.jpg" },
+  { src: "/gallery/rembrandt-style-man-in-hat.jpg", footnote: "Old Masters\u2019 indirect painting method with multi-layered transparent glazes. Please inquire separately." },
   { src: "/gallery/pieta-inspired-hooded-figure.jpg" },
   { src: "/gallery/two-horses-in-red-water.jpg" },
   { src: "/gallery/woman-holding-lamb.jpg", footnote: "Old Masters\u2019 indirect painting method with multi-layered transparent glazes. Please inquire separately." },
@@ -30,7 +30,7 @@ const galleryItems: { src: string; footnote?: string }[] = [
   { src: "/gallery/white-horse-impasto.jpg" },
   { src: "/gallery/rubens-style-woman-in-hat.jpg", footnote: "Old Masters\u2019 indirect painting method with multi-layered transparent glazes. Please inquire separately." },
   { src: "/gallery/mediterranean-coastal-village.jpg" },
-  { src: "/gallery/rembrandt-style-man-in-hat.jpg", footnote: "Old Masters\u2019 indirect painting method with multi-layered transparent glazes. Please inquire separately." },
+  { src: "/gallery/elegant-woman-in-black-dress.jpg" },
   { src: "/gallery/cat-with-flowers.jpg" },
   { src: "/gallery/woman-reading-in-white-dress.jpg" },
   { src: "/gallery/blue-white-irises-palette-knife.jpg" },
