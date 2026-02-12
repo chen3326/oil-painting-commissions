@@ -35,6 +35,10 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
           can take up to an additional week.
         </p>
         <p className="mb-4">
+          If you prefer a shorter timeline, ready-made pieces are also available
+          across a range of subjects and styles at a lower price point.
+        </p>
+        <p className="mb-4">
           Timeline and pricing depend on size, complexity, and technique. Below
           is a general guide:
         </p>
@@ -55,7 +59,7 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
               <td className="pt-2">$3,000–$5,000</td>
             </tr>
             <tr className="border-b">
-              <td colSpan={4} className="pb-2 text-sm text-muted-foreground">The standard size for wall-mounted portraits</td>
+              <td colSpan={4} className="pb-2 text-sm text-muted-foreground">The standard size for wall-mounted pieces</td>
             </tr>
             <tr>
               <td className="pt-2 pr-4">Statement</td>
@@ -90,7 +94,7 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
           Custom dimensions within any size category can be accommodated.
         </p>
         <p className="mb-4">
-          <strong>Choosing a size:</strong> For most portraits,
+          <strong>Choosing a size:</strong> For most paintings,
           clients find the Classic size perfectly suited—the standard for
           wall-mounted pieces. For compositions with multiple subjects, a
           larger size is recommended to allow sufficient space for detail.
@@ -110,7 +114,7 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
           start.
         </p>
         <p>
-          Complexity and technique both affect time and cost—a single portrait
+          Complexity and technique both affect time and cost—a single-subject piece
           differs from a multi-figure composition, and the Old Masters&apos;
           indirect glazing method requires significantly more time and material.
           Contact me with your details for an accurate quote.
@@ -144,11 +148,6 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
     ),
   },
   {
-    question: "What subjects are accepted, and what subjects are not?",
-    answer:
-      "My passion is creating dignified portraits of people and animals that celebrate their lives. Many of my clients commission family portraits intended to be passed down as heirlooms. That said, I am skilled in most subjects. I do not accept commissions intended to satirize or mock the person being portrayed, regardless of whether they are a public figure. For animals, I paint most common subjects—cats, dogs, birds, horses—without issue. Exotic animals are evaluated on a case-by-case basis.",
-  },
-  {
     question: "Can you work from old or low-quality photos?",
     answer:
       "Yes, I have done it before and it is not an issue. A high-quality reference photo is always preferred, but not required.",
@@ -156,7 +155,7 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
   {
     question: "Can the painting differ from my photo?",
     answer:
-      "Absolutely. I can adjust the subject, posture, lighting, background—nearly everything—based on your needs. For example, if you have separate photos of different people, I can combine them into a group portrait. This is not an issue.",
+      "Absolutely. I can adjust the subject, posture, lighting, background—nearly everything—based on your needs. For example, if you have separate photos of different people, I can combine them into a single composition. This is not an issue.",
   },
   {
     question:
@@ -173,6 +172,22 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
     question: "Can I expedite my commission?",
     answer:
       "If your commission is a gift and you have a specific date in mind, I will do my best to accommodate your timeline at no additional charge. However, please allow a minimum of two weeks even for simpler and smaller pieces.",
+  },
+  {
+    question: "Are ready-made pieces available?",
+    answer: (
+      <>
+        <p className="mb-4">
+          Yes, I carry ready-made pieces across a wide range of subjects and
+          styles. If you are interested, please inquire for available works.
+        </p>
+        <p>
+          Even for ready-made pieces, please allow 1–2 weeks for delivery—each
+          piece is removed from its current frame, fitted into a custom new
+          frame, secured in a custom-built crate, and shipped with insurance.
+        </p>
+      </>
+    ),
   },
   {
     question: "Do you offer framing?",
