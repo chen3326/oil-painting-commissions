@@ -148,6 +148,22 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
     ),
   },
   {
+    question: "Are ready-made pieces available?",
+    answer: (
+      <>
+        <p className="mb-4">
+          Yes, I carry ready-made pieces across a wide range of subjects and
+          styles. If you are interested, please inquire for available works.
+        </p>
+        <p>
+          Even for ready-made pieces, please allow 1–2 weeks for delivery—each
+          piece is removed from its current frame, fitted into a custom new
+          frame, secured in a custom-built crate, and shipped with insurance.
+        </p>
+      </>
+    ),
+  },
+  {
     question: "Can you work from old or low-quality photos?",
     answer:
       "Yes, I have done it before and it is not an issue. A high-quality reference photo is always preferred, but not required.",
@@ -172,22 +188,6 @@ export const faqItems: { question: string; answer: React.ReactNode }[] = [
     question: "Can I expedite my commission?",
     answer:
       "If your commission is a gift and you have a specific date in mind, I will do my best to accommodate your timeline at no additional charge. However, please allow a minimum of two weeks even for simpler and smaller pieces.",
-  },
-  {
-    question: "Are ready-made pieces available?",
-    answer: (
-      <>
-        <p className="mb-4">
-          Yes, I carry ready-made pieces across a wide range of subjects and
-          styles. If you are interested, please inquire for available works.
-        </p>
-        <p>
-          Even for ready-made pieces, please allow 1–2 weeks for delivery—each
-          piece is removed from its current frame, fitted into a custom new
-          frame, secured in a custom-built crate, and shipped with insurance.
-        </p>
-      </>
-    ),
   },
   {
     question: "Do you offer framing?",
