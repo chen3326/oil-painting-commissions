@@ -47,7 +47,7 @@ const STEPS = [
       {
         value: "classic",
         label: 'Classic — 24" × 36"',
-        description: "The standard size for wall-mounted portraits",
+        description: "The standard size for wall-mounted pieces",
       },
       {
         value: "statement",
